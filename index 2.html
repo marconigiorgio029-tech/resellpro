@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0d0c">
+<meta name="description" content="ResellPro: organizza il tuo inventario, calcola i margini e tieni sotto controllo il tuo reselling.">
+<link rel="manifest" href="manifest.json">
+<title>ResellPro — Reselling, sotto controllo</title>
+<style>
+:root{--bg:#090b0a;--panel:#121614;--panel2:#171c19;--line:#28312b;--text:#f3f7f3;--muted:#9ba79f;--green:#b8f36b;--green2:#83d83e;--red:#ff7d7d;--radius:20px}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#1b2b1b 0,transparent 38%),var(--bg);color:var(--text);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:94px}
+button,input,select{font:inherit}button{cursor:pointer} .app{max-width:920px;margin:auto;padding:18px 16px 30px}
+header{display:flex;align-items:center;justify-content:space-between;padding:10px 2px 22px}.brand{display:flex;gap:10px;align-items:center}.logo{height:42px;width:42px;border-radius:14px;background:var(--green);display:grid;place-items:center;color:#10150d;font-size:22px;font-weight:900;box-shadow:0 0 24px #b8f32222}.brand strong{display:block;font-size:18px;letter-spacing:-.5px}.brand small{color:var(--muted);font-size:11px;letter-spacing:1.8px;text-transform:uppercase}.tag{border:1px solid #3d5635;color:var(--green);background:#182218;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:700}
+h1{font-size:clamp(27px,7vw,38px);letter-spacing:-1.4px;line-height:1.05;margin:5px 0 10px}h2{font-size:20px;letter-spacing:-.5px;margin:0 0 14px}h3{font-size:14px;margin:0 0 8px}.muted{color:var(--muted)}.eyebrow{color:var(--green);font-size:11px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase}.intro{color:var(--muted);max-width:530px;margin:0 0 22px}
+.hero{border:1px solid #31432d;background:linear-gradient(135deg,#18221a,#101411 68%);border-radius:26px;padding:23px 21px;margin-bottom:17px;position:relative;overflow:hidden}.hero:after{content:"↗";position:absolute;right:18px;top:4px;font-size:85px;font-weight:900;color:#b8f36b0d}.hero .big{font-size:34px;font-weight:800;letter-spacing:-1px;margin:7px 0 2px}.hero-foot{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:20px;font-size:12px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.stat,.panel{border:1px solid var(--line);background:linear-gradient(145deg,#151a17,#101311);border-radius:var(--radius);padding:16px}.stat .label{font-size:12px;color:var(--muted);margin-bottom:8px}.stat .value{font-size:23px;font-weight:800;letter-spacing:-.7px}.stat .sub{font-size:11px;color:var(--muted);margin-top:4px}.positive{color:var(--green)!important}.negative{color:var(--red)!important}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin:24px 0 12px}.btn{border:0;border-radius:13px;background:var(--green);color:#11170d;font-weight:800;padding:12px 15px}.btn.secondary{background:#202822;color:var(--text);border:1px solid #334036}.btn.ghost{background:transparent;color:var(--green);padding:8px}.btn.small{padding:8px 10px;font-size:12px}.btn:active{transform:scale(.98)}
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.quick button{min-height:78px;border:1px solid var(--line);border-radius:16px;background:var(--panel);color:var(--text);padding:12px 7px;text-align:left}.quick b{display:block;color:var(--green);font-size:20px;margin-bottom:4px}.quick span{font-size:11px;color:var(--muted)}
+nav{position:fixed;bottom:0;left:0;right:0;background:#0b0e0cf2;backdrop-filter:blur(20px);border-top:1px solid #28312b;padding:9px 8px calc(9px + env(safe-area-inset-bottom));display:flex;justify-content:center;z-index:5}nav .navinner{width:min(600px,100%);display:grid;grid-template-columns:repeat(4,1fr);gap:4px}nav button{border:0;background:transparent;color:var(--muted);border-radius:13px;padding:8px 2px;font-size:10px}nav button .ico{display:block;font-size:19px;margin-bottom:3px}nav button.active{background:#1b271b;color:var(--green)}
+.view{display:none}.view.active{display:block}.empty{padding:25px 10px;text-align:center;color:var(--muted)}.empty .symbol{font-size:30px;margin-bottom:8px}.item{display:flex;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid #273029}.item:last-child{border-bottom:0}.itemicon{width:44px;height:44px;flex:0 0 44px;border-radius:14px;background:#202a22;display:grid;place-items:center;font-size:22px}.itemmain{flex:1;min-width:0}.itemmain strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.itemmain small{color:var(--muted);font-size:12px}.itemright{text-align:right}.itemright strong{display:block}.actions{display:flex;gap:7px;margin-top:7px;justify-content:flex-end}
+form{display:grid;gap:12px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field{display:grid;gap:6px}.field label{font-size:12px;color:var(--muted)}.field input,.field select{width:100%;background:#0c100d;border:1px solid #303b32;border-radius:12px;padding:12px;color:var(--text);min-width:0;outline:none}.field input:focus,.field select:focus{border-color:var(--green)}.field.full{grid-column:1/-1}.result{border:1px solid #3b5732;background:#182318;border-radius:16px;padding:16px;display:flex;justify-content:space-between;align-items:center;gap:10px}.result strong{font-size:25px;color:var(--green)}
+.note{border:1px solid #3c4938;background:#141b14;border-radius:15px;padding:14px;color:var(--muted);font-size:12px;margin-top:13px}.opportunity{padding:15px 0;border-bottom:1px solid var(--line)}.opportunity:last-child{border:0}.opportunity p{color:var(--muted);font-size:13px;margin:6px 0 10px}.chip{display:inline-block;border:1px solid #354335;border-radius:99px;padding:4px 8px;color:var(--green);font-size:10px;margin:0 4px 4px 0}
+footer{text-align:center;color:#68736b;font-size:11px;margin-top:24px}.toast{position:fixed;left:50%;bottom:100px;transform:translateX(-50%);background:#d7ffad;color:#10150d;border-radius:12px;padding:10px 15px;font-weight:700;font-size:13px;z-index:10;display:none;max-width:90%;text-align:center}
+@media(min-width:650px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.hero{padding:30px}.content-two{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}.section-head{margin-top:28px}}
+@media(max-width:370px){.app{padding-left:12px;padding-right:12px}.stat{padding:13px}.stat .value{font-size:20px}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.tag{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="brand"><div class="logo">R</div><div><strong>ResellPro</strong><small>Reselling, sotto controllo</small></div></div><span class="tag">BETA · GRATIS</span></header>
+<main>
+<section class="view active" id="dashboard">
+<div class="eyebrow">Il tuo spazio di lavoro</div><h1>Fai spazio al<br><span class="positive">prossimo profitto.</span></h1><p class="intro">Tieni sotto controllo articoli, costi e margini. Un passo alla volta, un acquisto più consapevole.</p>
+<div class="hero"><div class="eyebrow">Profitto realizzato</div><div class="big" id="profitTotal">€ 0,00</div><div class="muted" style="font-size:12px">Dalle vendite registrate</div><div class="hero-foot"><span id="soldCount">0 articoli venduti</span><button class="btn small" onclick="showView('calculator')">Calcola margine ↗</button></div></div>
+<div class="grid">
+<div class="stat"><div class="label">Articoli in inventario</div><div class="value" id="stockCount">0</div><div class="sub">Pronti da vendere</div></div>
+<div class="stat"><div class="label">Capitale investito</div><div class="value" id="invested">€ 0</div><div class="sub">Negli articoli disponibili</div></div>
+<div class="stat"><div class="label">Valore vendita stimato</div><div class="value" id="potential">€ 0</div><div class="sub">Ai prezzi che hai inserito</div></div>
+<div class="stat"><div class="label">Margine potenziale</div><div class="value positive" id="potentialProfit">€ 0</div><div class="sub">Prima di eventuali costi extra</div></div>
+</div>
+<div class="section-head"><h2>Azioni rapide</h2></div><div class="quick">
+<button onclick="showView('inventory');document.getElementById('itemName').focus()"><b>＋</b><span>Aggiungi articolo</span></button>
+<button onclick="showView('calculator')"><b>↗</b><span>Calcola profitto</span></button>
+<button onclick="showView('opportunities')"><b>⌕</b><span>Idee reselling</span></button>
+</div>
+<div class="section-head"><h2>Ultimi articoli</h2><button class="btn ghost" onclick="showView('inventory')">Vedi tutto →</button></div><div class="panel" id="recentItems"><div class="empty"><div class="symbol">◌</div>Il tuo prossimo affare comincia qui.<br>Aggiungi il primo articolo all'inventario.</div></div>
+<div class="note">🔒 I tuoi dati sono salvati in questo browser su questo dispositivo. Non cancellare i dati del sito se vuoi conservarli. Questa versione non è collegata a Vinted e non importa automaticamente gli annunci.</div>
+</section>
+<section class="view" id="inventory">
+<div class="eyebrow">Gestione articoli</div><h1>Il tuo <span class="positive">inventario.</span></h1><p class="intro">Registra gli acquisti e controlla il margine stimato prima di vendere.</p>
+<div class="panel"><h2 id="formTitle">Aggiungi articolo</h2><form id="itemForm">
+<div class="field"><label for="itemName">Nome articolo</label><input id="itemName" maxlength="80" placeholder="Es. Giacca vintage" required></div>
+<div class="formgrid">
+<div class="field"><label for="category">Categoria</label><select id="category"><option>Abbigliamento</option><option>Scarpe</option><option>Borse e accessori</option><option>Libri</option><option>Casa</option><option>Elettronica</option><option>Altro</option></select></div>
+<div class="field"><label for="condition">Condizione</label><select id="condition"><option>Ottimo</option><option>Buono</option><option>Come nuovo</option><option>Da sistemare</option></select></div>
+<div class="field"><label for="buyPrice">Costo acquisto (€)</label><input id="buyPrice" type="number" min="0" step=".01" placeholder="5,00" required></div>
+<div class="field"><label for="sellPrice">Prezzo vendita previsto (€)</label><input id="sellPrice" type="number" min="0" step=".01" placeholder="15,00" required></div>
+<div class="field full"><label for="extraCost">Altri costi (€)</label><input id="extraCost" type="number" min="0" step=".01" value="0"></div>
+</div><div class="result"><div><span class="muted" style="font-size:12px">Margine stimato</span><br><span class="muted" style="font-size:11px">Prima di commissioni non inserite</span></div><strong id="formMargin">€ 0,00</strong></div>
+<div style="display:flex;gap:8px"><button class="btn" id="saveItem" type="submit" style="flex:1">Salva articolo</button><button class="btn secondary" type="button" id="cancelEdit" style="display:none" onclick="resetForm()">Annulla</button></div>
+</form></div>
+<div class="section-head"><h2>Articoli salvati</h2><span class="muted" id="inventoryCount">0 articoli</span></div>
+<div class="panel"><div class="field" style="margin-bottom:10px"><label for="searchItems">Cerca nell'inventario</label><input id="searchItems" placeholder="Nome o categoria…"></div><div id="inventoryItems"><div class="empty">Ancora nessun articolo.</div></div></div>
+</section>
+<section class="view" id="calculator">
+<div class="eyebrow">Prima di comprare</div><h1>Il margine, <span class="positive">senza sorprese.</span></h1><p class="intro">Stima quanto potrebbe restare dopo l'acquisto e le spese che conosci.</p>
+<div class="panel"><form id="calcForm">
+<div class="formgrid">
+<div class="field"><label for="calcBuy">Prezzo d'acquisto (€)</label><input id="calcBuy" type="number" min="0" step=".01" value="5"></div>
+<div class="field"><label for="calcSell">Prezzo di vendita (€)</label><input id="calcSell" type="number" min="0" step=".01" value="15"></div>
+<div class="field"><label for="calcExtra">Altri costi (€)</label><input id="calcExtra" type="number" min="0" step=".01" value="0"></div>
+<div class="field"><label for="calcFees">Commissioni/spese a tuo carico (€)</label><input id="calcFees" type="number" min="0" step=".01" value="0"></div>
+</div>
+<div class="result"><div><span class="muted" style="font-size:12px">Profitto stimato</span><br><span class="muted" style="font-size:11px">Ricavo meno tutti i costi inseriti</span></div><strong id="calcProfit">€ 10,00</strong></div>
+<div class="grid" style="margin-top:11px"><div class="stat"><div class="label">ROI stimato</div><div class="value" id="calcRoi">200%</div><div class="sub">Profitto ÷ costo totale</div></div><div class="stat"><div class="label">Margine sul prezzo</div><div class="value" id="calcMargin">66,7%</div><div class="sub">Profitto ÷ prezzo vendita</div></div></div>
+</form><div class="note">Il risultato è una stima, non una garanzia di vendita. Inserisci tutte le spese che ricadono su di te e verifica le regole e le commissioni aggiornate della piattaforma che usi.</div></div>
+</section>
+<section class="view" id="opportunities">
+<div class="eyebrow">Idee per iniziare</div><h1>Compra con criterio.<br><span class="positive">Rivendi con metodo.</span></h1><p class="intro">Spunti da verificare con il tuo budget iniziale inferiore a 50 €. Non sono annunci live né promesse di guadagno.</p>
+<div class="panel">
+<div class="opportunity"><span class="chip">Budget basso</span><span class="chip">Facile da spedire</span><h3>Libri e piccoli lotti</h3><p>Cerca titoli richiesti o set completi. Confronta le vendite comparabili, non solo i prezzi richiesti, e considera il tempo necessario per venderli.</p><button class="btn secondary small" onclick="useIdea('Lotto di libri')">Aggiungi idea all'inventario</button></div>
+<div class="opportunity"><span class="chip">Second hand</span><span class="chip">Controllo qualità</span><h3>Abbigliamento di marca usato</h3><p>Parti da capi in buone condizioni, con taglia ed etichette chiare. Controlla cuciture, macchie, autenticità e prezzi di articoli simili.</p><button class="btn secondary small" onclick="useIdea('Abbigliamento second hand')">Aggiungi idea all'inventario</button></div>
+<div class="opportunity"><span class="chip">Piccoli accessori</span><span class="chip">Basso ingombro</span><h3>Cinture, sciarpe e accessori</h3><p>Valuta solo pezzi puliti e descrivibili con precisione. Evita articoli contraffatti e verifica che la categoria sia consentita sulla piattaforma.</p><button class="btn secondary small" onclick="useIdea('Accessori second hand')">Aggiungi idea all'inventario</button></div>
+<div class="opportunity"><span class="chip">Regola pratica</span><h3>Calcola prima di comprare</h3><p>Stima il prezzo realistico di vendita, sottrai acquisto e spese e decidi in anticipo il profitto minimo che rende sensato l'acquisto.</p><button class="btn small" onclick="showView('calculator')">Apri calcolatore ↗</button></div>
+</div>
+<div class="note">ResellPro non cerca o importa automaticamente annunci da Vinted. Usa questi spunti come checklist e verifica sempre le regole ufficiali della piattaforma e la provenienza degli articoli.</div>
+</section>
+</main>
+<footer>RESSELLPRO · VERSIONE INIZIALE · I TUOI DATI RESTANO NEL BROWSER</footer>
+</div>
+<nav><div class="navinner">
+<button class="active" data-view="dashboard" onclick="showView('dashboard')"><span class="ico">⌂</span>Home</button>
+<button data-view="inventory" onclick="showView('inventory')"><span class="ico">▤</span>Inventario</button>
+<button data-view="calculator" onclick="showView('calculator')"><span class="ico">↗</span>Calcolatore</button>
+<button data-view="opportunities" onclick="showView('opportunities')"><span class="ico">✳</span>Idee</button>
+</div></nav><div class="toast" id="toast"></div>
+<script>
+const KEY='resellpro_items_v1';let items=[];let editingId=null;
+try{items=JSON.parse(localStorage.getItem(KEY)||'[]');if(!Array.isArray(items))items=[]}catch(e){items=[]}
+const euro=n=>new Intl.NumberFormat('it-IT',{style:'currency',currency:'EUR'}).format(Number(n)||0);
+const num=id=>Math.max(0,Number(document.getElementById(id).value)||0);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(items));return true}catch(e){toast('Impossibile salvare i dati in questo browser.');return false}}
+function toast(s){let t=document.getElementById('toast');t.textContent=s;t.style.display='block';clearTimeout(window._toast);window._toast=setTimeout(()=>t.style.display='none',2300)}
+function showView(v){document.querySelectorAll('.view').forEach(el=>el.classList.toggle('active',el.id===v));document.querySelectorAll('nav button').forEach(el=>el.classList.toggle('active',el.dataset.view===v));window.scrollTo({top:0,behavior:'smooth'});if(v==='inventory')renderInventory()}
+function costs(i){return Number(i.buy)+Number(i.extra||0)}
+function profit(i){return Number(i.sell)-costs(i)}
+function icon(cat){return ({'Abbigliamento':'♧','Scarpe':'♢','Borse e accessori':'◇','Libri':'▤','Casa':'⌂','Elettronica':'⌁','Altro':'✳'})[cat]||'✳'}
+function itemHTML(i,withActions=true){let p=profit(i);return `<div class="item"><div class="itemicon">${icon(i.category)}</div><div class="itemmain"><strong>${esc(i.name)}</strong><small>${esc(i.category)} · Acquisto ${euro(i.buy)} · ${i.sold?'Venduto':'Previsto '+euro(i.sell)}</small><div class="muted" style="font-size:11px">${esc(i.condition||'')}</div></div><div class="itemright"><strong class="${(i.sold?Number(i.actual||i.sell)-costs(i):p)>=0?'positive':'negative'}">${euro(i.sold?Number(i.actual||i.sell)-costs(i):p)}</strong><small class="muted">${i.sold?'profitto reale*':'stimato'}</small>${withActions?`<div class="actions">${i.sold?'':`<button class="btn small" onclick="markSold('${i.id}')">Venduto</button>`}<button class="btn secondary small" onclick="editItem('${i.id}')">Modifica</button><button class="btn secondary small" onclick="deleteItem('${i.id}')">×</button></div>`:''}</div></div>`}
+function render(){let stock=items.filter(i=>!i.sold),sold=items.filter(i=>i.sold);let realised=sold.reduce((s,i)=>s+(Number(i.actual||i.sell)-costs(i)),0),invest=stock.reduce((s,i)=>s+costs(i),0),potential=stock.reduce((s,i)=>s+Number(i.sell),0),potprofit=stock.reduce((s,i)=>s+profit(i),0);
+document.getElementById('profitTotal').textContent=euro(realised);document.getElementById('soldCount').textContent=`${sold.length} ${sold.length===1?'articolo venduto':'articoli venduti'}`;document.getElementById('stockCount').textContent=stock.length;document.getElementById('invested').textContent=euro(invest);document.getElementById('potential').textContent=euro(potential);document.getElementById('potentialProfit').textContent=euro(potprofit);
+let recent=[...items].reverse().slice(0,3);document.getElementById('recentItems').innerHTML=recent.length?recent.map(i=>itemHTML(i,false)).join(''):'<div class="empty"><div class="symbol">◌</div>Il tuo prossimo affare comincia qui.<br>Aggiungi il primo articolo all’inventario.</div>';renderInventory()}
+function renderInventory(){let q=(document.getElementById('searchItems')?.value||'').toLowerCase();let filtered=[...items].reverse().filter(i=>(i.name+' '+i.category).toLowerCase().includes(q));document.getElementById('inventoryCount').textContent=`${items.length} ${items.length===1?'articolo':'articoli'}`;document.getElementById('inventoryItems').innerHTML=filtered.length?filtered.map(i=>itemHTML(i,true)).join(''):'<div class="empty">Nessun articolo trovato. Aggiungine uno qui sopra.</div>'}
+function formMargin(){let p=num('sellPrice')-num('buyPrice')-num('extraCost');let el=document.getElementById('formMargin');el.textContent=euro(p);el.className=p>=0?'positive':'negative'}
+['buyPrice','sellPrice','extraCost'].forEach(id=>document.getElementById(id).addEventListener('input',formMargin));
+document.getElementById('itemForm').addEventListener('submit',e=>{e.preventDefault();let obj={id:editingId||String(Date.now()),name:document.getElementById('itemName').value.trim(),category:document.getElementById('category').value,condition:document.getElementById('condition').value,buy:num('buyPrice'),sell:num('sellPrice'),extra:num('extraCost'),sold:false};if(!obj.name)return; if(editingId){let old=items.find(i=>i.id===editingId);if(old){obj.sold=old.sold;obj.actual=old.actual;items=items.map(i=>i.id===editingId?obj:i)}}else items.push(obj);persist();resetForm();render();toast('Articolo salvato');});
+function resetForm(){editingId=null;document.getElementById('itemForm').reset();document.getElementById('extraCost').value='0';document.getElementById('formTitle').textContent='Aggiungi articolo';document.getElementById('saveItem').textContent='Salva articolo';document.getElementById('cancelEdit').style.display='none';formMargin()}
+function editItem(id){let i=items.find(x=>x.id===id);if(!i)return;editingId=id;showView('inventory');document.getElementById('itemName').value=i.name;document.getElementById('category').value=i.category;document.getElementById('condition').value=i.condition||'Ottimo';document.getElementById('buyPrice').value=i.buy;document.getElementById('sellPrice').value=i.sell;document.getElementById('extraCost').value=i.extra||0;document.getElementById('formTitle').textContent='Modifica articolo';document.getElementById('saveItem').textContent='Salva modifiche';document.getElementById('cancelEdit').style.display='block';formMargin();document.getElementById('itemName').focus()}
+function deleteItem(id){if(!confirm('Vuoi eliminare questo articolo?'))return;items=items.filter(i=>i.id!==id);persist();render();toast('Articolo eliminato')}
+function markSold(id){let i=items.find(x=>x.id===id);if(!i)return;let ans=prompt('A quanto hai venduto l’articolo? Inserisci il prezzo finale in euro:',String(i.sell));if(ans===null)return;let actual=Number(ans.replace(',','.'));if(!Number.isFinite(actual)||actual<0){toast('Inserisci un prezzo valido');return}i.sold=true;i.actual=actual;persist();render();toast('Vendita registrata')}
+document.getElementById('searchItems').addEventListener('input',renderInventory);
+function calc(){let b=num('calcBuy'),s=num('calcSell'),x=num('calcExtra'),f=num('calcFees'),p=s-b-x-f,base=b+x+f;document.getElementById('calcProfit').textContent=euro(p);document.getElementById('calcProfit').className=p>=0?'positive':'negative';document.getElementById('calcRoi').textContent=base?((p/base)*100).toLocaleString('it-IT',{maximumFractionDigits:1})+'%':'—';document.getElementById('calcMargin').textContent=s?((p/s)*100).toLocaleString('it-IT',{maximumFractionDigits:1})+'%':'—'}
+document.getElementById('calcForm').addEventListener('input',calc);
+function useIdea(name){showView('inventory');resetForm();document.getElementById('itemName').value=name;document.getElementById('itemName').focus();toast('Idea aggiunta al modulo: inserisci i prezzi')}
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+render();calc();formMargin();
+</script>
+</body></html>
